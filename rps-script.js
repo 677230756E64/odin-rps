@@ -25,6 +25,7 @@ function inputCheck(pInput){
 function playRpsRound(cChoice, pChoice){
     if(inputCheck(pChoice) == 0){
         console.log("We can't play if you don't choose either 'rock', 'paper' or 'scissors'");
+        roundCount -= 1;
         return;
     }
     
@@ -71,13 +72,37 @@ function playRpsRound(cChoice, pChoice){
 
     console.log(`You chose '${pChoice}', the computer chose '${cChoice}'`);
     if(outcome == -1){
-        return "The computer wins!";
-    } else if(outcome == 0){
-        return "It's a draw!";
-    } else return "You won!";
+        computerWins += 1;
+        return "The computer wins this round";
+    } else if(outcome == 1){
+        playerWins += 1;
+        return "You win this round!";
+    } else return "It's a draw this round";
 }
 
-let computerSeleciton = getComputerChoice();
-let playerSelection = getPlayerChoice();
+function playRpsGame(){
+    let computerSeleciton = getComputerChoice();
+    let playerSelection = getPlayerChoice();
+    console.log(playRpsRound(computerSeleciton, playerSelection));
+    
+    if(roundCount < 4){
+        roundCount += 1;
+        playRpsGame();
+    }
 
-console.log(playRpsRound(computerSeleciton, playerSelection));
+    roundCount -= 1;
+
+    if(roundCount == 0){
+        console.log(`The computer has ${computerWins} wins, you have ${playerWins} wins`);
+        let result = computerWins - playerWins;
+        if(result > 0){
+            console.log("The computer won");
+        } else if(result == 0){
+            console.log("The game is a draw");
+        } else console.log("You won!");
+    }
+}
+
+let roundCount = 0;
+let computerWins = 0, playerWins = 0;
+playRpsGame();

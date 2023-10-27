@@ -1,4 +1,4 @@
-//a program that plays a round of rock-paper-scissors
+//a program that plays a game of rock-paper-scissors
 
 function getComputerChoice(){
     let computerInput = Math.random();
@@ -70,7 +70,7 @@ function playRpsRound(cChoice, pChoice){
             break;
     }
 
-    console.log(`You chose '${pChoice}', the computer chose '${cChoice}'`);
+    console.log(`The computer chose '${cChoice}', you chose '${pChoice}'`);
     if(outcome == -1){
         computerWins += 1;
         return "The computer wins this round";
